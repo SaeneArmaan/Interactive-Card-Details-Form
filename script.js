@@ -79,7 +79,10 @@ function validateInputs() {
     if (input.id === "month") {
       const month = input.value;
 
-      if (month <= 0 || month > 12) {
+      if (!digitRegex.test(month)) {
+        showError(input, "Please enter a valid month");
+        return false;
+      } else if (month <= 0 || month > 12) {
         showError(input, "Please enter a valid month");
         return false;
       }
@@ -93,7 +96,10 @@ function validateInputs() {
       const date = new Date();
       const currYear = String(date.getFullYear()).slice(2, 4);
 
-      if (year < Number(currYear)) {
+      if (!digitRegex.test(year)) {
+        showError(input, "Please enter a valid year");
+        return false;
+      } else if (year < Number(currYear)) {
         showError(input, "Card is expired");
         return false;
       }
